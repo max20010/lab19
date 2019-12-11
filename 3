@@ -4,23 +4,24 @@ using namespace std;
 int main()
 {
 	setlocale(LC_ALL, "ru");
-	int m, n, x = 0, min, min_x;
+	int m, n, x = 0;
 	bool check = false;
 	float sum = 0;
 	cout << "Введите кол-во строк в массиве: ";
 	cin >> m;
 	cout << "Введите кол-во столбцов в массиве: ";
 	cin >> n;
-	int* n1 = new int[n];
 	int** a = new int*[m];
+	int** a1 = new int*[m];
 	for (int i = 0; i < m; i++) {
 		a[i] = new int[n];
+		a1[i] = new int[n];
 	}
-	for (int i = 0, l = 0; i < m; i++) {
+	for (int i = 0; i < m; i++) {
 		for (int j = 0; j < n; j++) {
 			//cin >> a[i][j];
-			l++;
-			a[i][j] = l;
+			a[i][j] = rand()%30;
+			a1[i][j] = a[i][j];
 		}
 	}
 	for (int i = 0, l = 0; i < m; i++) {
@@ -29,21 +30,27 @@ int main()
 		}
 		cout << endl;
 	}
-	min = a[0][0], min_x = 0;
-	for (int i = 0; i < m; i++) {
-		for (int j = 0; j < n; j++) {
-
-			if (min > a[i][j]) {
-				min = a[i][j];
-				min_x = j;
-			}
+	/*for (int i = 0; i < m/2; i++) {
+		for (int j = 0; j < n/2; j++) {
+			a1[i][j] = a[m/2 + i][n/2 + j];
+		}
+	}*/
+	for (int i = m; m/2 > i; i--) {
+		for (int j = n; n/2 > j / 2; j--) {
+			a1[i][j] = a[m -i][n - j];
+			cout << a1[i][j] << endl;
 		}
 	}
-	cout << "min: " << min << "\t" << min_x << endl;
-
+	cout << endl;
+	for (int i = 0, l = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			cout << a1[i][j] << "\t";
+		}
+		cout << endl;
+	}
 	for (int i = 0; i < m; i++) {
 		delete[] a[i];
 	}
 	delete[] a;
-	delete[] n1;
+	delete[] a1;
 }
