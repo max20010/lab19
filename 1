@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+	setlocale(LC_ALL, "ru");
+	int m, n,x=0,min,max,max_x,min_x;
+	bool check = false;
+	float sum = 0;
+	cout << "Введите кол-во строк в массиве: ";
+	cin >> m;
+	cout << "Введите кол-во столбцов в массиве: ";
+	cin >> n;
+	int** a = new int* [m];
+	for (int i = 0; i < m; i++) {
+		a[i] = new int[n];
+	}
+
+	for (int i = 0,l=0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			//cin >> a[i][j];
+			l++;
+			a[i][j] = l;
+		}
+	}
+
+	for (int i = 0, l = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			cout << a[i][j] << "\t";
+		}
+		cout << endl;
+	}
+
+	for (int i = 0; i < m; i++) {
+		max = a[i][0], min = a[i][0], max_x = 0, min_x = 0;
+		for (int j = 0; j < n; j++) {
+			if (max < a[i][j]) {
+				max = a[i][j];
+				max_x = j;
+			}
+			if (min > a[i][j]) {
+				min = a[i][j];
+				min_x = j;
+			}
+		}
+		for (int j = 0; j < n; j++) {
+			if (j == max_x) {
+				a[i][max_x] = min;
+			}
+			if (j == min_x) {
+				a[i][min_x] = max;
+			}
+		}
+		cout << "max: " << max << "\tmin: " << min << endl;
+	}
+	for (int i = 0, l = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			cout << a[i][j] << "\t";
+		}
+		cout << endl;
+	}
+
+	for (int i = 0; i < m; i++) {
+		delete[] a[i];
+	}
+	delete[] a;
+}
